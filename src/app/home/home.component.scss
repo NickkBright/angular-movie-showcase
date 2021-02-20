@@ -1,0 +1,40 @@
+@import "/src/styles";
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 20vw);
+    grid-template-rows: repeat(5, 1fr);
+    justify-content: center;
+}
+
+.movie-info {
+    display: flex;
+}
+
+.movie-title {
+    flex-grow: 1;
+}
+
+button {
+    border: none;
+    border-radius: 20px;
+    background: $primary;
+    color: white;
+    height: 30px;
+    width: 30%;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: auto 2em auto auto;
+}
+
+button:hover {
+        background: darken($primary, 20%);
+}
+
+img {
+    width: 100%;
+}

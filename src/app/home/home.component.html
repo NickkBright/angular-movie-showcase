@@ -1,0 +1,10 @@
+<div class="grid-container">
+   <div *ngFor="let movie of movies" class="movie-container">
+       <img src={{movie.poster}}/>
+       <div class="movie-info">
+            <p class="movie-title">{{movie.title}}</p>
+            <button type="button" (click)="showCurrentMovieDetails(movie.id)">Details</button>
+       </div>
+       
+   </div>
+</div>

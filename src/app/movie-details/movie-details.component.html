@@ -1,0 +1,12 @@
+
+<div *ngIf="movie" class="movie-info-container">
+    <img src="{{movie.poster}}" class="poster"/>
+    <div>
+        <h1>{{movie.title}}</h1>
+        <h2>Release date: {{movie.release_date}}</h2>
+        <p>{{movie.overview}}</p>
+        <span>Rating {{movie.vote_average}}</span>
+    </div>
+    
+</div>
+
