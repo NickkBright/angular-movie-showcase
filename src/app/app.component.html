@@ -3,16 +3,7 @@
 <header class="toolbar" role="banner">
   <div class="container">
     <a class="logo" routerLink=''>Movie Showcase</a>
-    <div class="searchContainer">
-      <input class="searchField" placeholder="search" #searchInput/>
-      <div class="resultsContainer" *ngIf="movies as results">
-        <ul class="resultsList">
-          <li *ngFor="let movie of results">
-            <a (click)="showCurrentMovieDetails(movie.id)">{{movie.title}}</a>
-          </li>
-        </ul>
-      </div> 
-    </div>
+    <app-search-bar class="searchContainer"></app-search-bar>
     
   <nav>
     <ul>

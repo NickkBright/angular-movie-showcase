@@ -1,0 +1,10 @@
+<div class="searchContainer">
+    <input class="searchField" placeholder="search" [formControl]="searchInput"/>
+    <div class="resultsContainer" *ngIf="movies as results">
+      <ul class="resultsList">
+        <li *ngFor="let movie of results">
+          <a (click)="showCurrentMovieDetails(movie.id)">{{movie.title}}</a>
+        </li>
+      </ul>
+    </div> 
+</div>

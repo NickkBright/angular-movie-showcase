@@ -13,10 +13,11 @@ export class ApiService {
     private apiUrl: string = "https://api.themoviedb.org/3/";
     private apiCall(url: string) {
         return this.http
-        .get(url)
-        .pipe(map((data: any) => data.results ? 
-            data.results.map(item => this.adapter.adapt(item)) : this.adapter.adapt(data))
-        );
+            .get(url)
+            .pipe(
+                map((data: any) => data.results ? 
+                data.results.map(item => this.adapter.adapt(item)) : this.adapter.adapt(data))
+            );
     }
 
     constructor(private http: HttpClient, private adapter: MovieAdapter){}

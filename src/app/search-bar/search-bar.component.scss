@@ -1,0 +1,57 @@
+@import '../../styles.scss';
+
+input:focus {
+    outline: none;
+}
+
+.searchContainer {
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 20%;
+    margin: auto;
+}
+
+.searchField {
+    width: 100%;
+    font-family: 'Nunito';
+    background: darken($primary, 5%);
+    color: white;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: auto;
+    border-radius: 20px;
+    height: 30px;
+}
+
+.searchField::placeholder {
+    opacity: 70%;
+    color: white;
+    font-family: 'Nunito';
+    font-weight: bold;
+}
+
+.resultsContainer {
+    border-radius: 5px;
+    width: inherit;
+    position: absolute;
+    margin-top: 0;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.resultsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    a {
+        color: black;
+    }
+    :hover {
+        background: darken(white, 20%);
+    }
+
+    li {
+        padding: 0.5em 0em 0.5em 1em;
+        cursor: pointer;
+    }
+}
