@@ -14,7 +14,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.authService.currentSession.subscribe(session => {
-      console.log("SESSION", session);
       if(session) {
         this.userIsLoggedIn = true
       }
