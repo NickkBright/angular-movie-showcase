@@ -6,7 +6,7 @@ import { Movie } from "../model/movie";
     providedIn: 'root'
 })
 export class MovieDataService {
-    private movieData = new BehaviorSubject(new Movie);
+    private movieData = new BehaviorSubject<Movie>(new Movie);
     currentData = this.movieData.asObservable();
 
     constructor() {}

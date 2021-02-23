@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthApprovedComponent } from './auth-approved/auth-approved.component';
 import { HomeComponent } from './home/home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthResolver } from './resolvers/auth-resolver';
-import { MovieResolver } from './resolvers/movie-resolver';
-import { AuthGuard } from './util/authGuard';
+import { AuthResolver } from './resolvers/auth.resolver';
+import { MovieResolver } from './resolvers/movie.resolver';
+import { AuthGuard } from './util/auth.guard';
 
 const routes: Routes = [
   {
     path:'', 
-    component: HomeComponent
+    component: HomeComponent,
+    resolve: {
+      resolvedSession: AuthResolver
+    }
   },
   {
     path: 'movie/:id', 
@@ -20,13 +22,6 @@ const routes: Routes = [
       resolvedMovie: MovieResolver
     },
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'approved',
-    component: AuthApprovedComponent,
-    resolve: {
-      resolvedSession: AuthResolver
-    }
   },
   {
     path:'404',

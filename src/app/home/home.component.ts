@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Movie, MovieAdapter } from '../model/movie';
 import { HttpClient } from "@angular/common/http";
 import {map} from 'rxjs/operators'
-import { ApiService } from '../services/api-service';
+import { ApiService } from '../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MovieDataService } from '../services/movie-data-service';
+import { MovieDataService } from '../services/movie-data.service';
 
 @Component({
   selector: 'app-home',

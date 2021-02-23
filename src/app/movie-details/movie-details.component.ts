@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Movie } from '../model/movie';
-import { ApiService } from '../services/api-service';
-import { MovieDataService } from '../services/movie-data-service';
 
 @Component({
   selector: 'app-movie-details',

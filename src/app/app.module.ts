@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthApprovedComponent } from './auth-approved/auth-approved.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import { AuthApprovedComponent } from './auth-approved/auth-approved.component';
     HomeComponent,
     MovieDetailsComponent,
     SearchBarComponent,
-    NotFoundComponent,
-    AuthApprovedComponent
+    NotFoundComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { first, map } from "rxjs/operators";
 import { RequestToken, Session } from "../model/auth";
-import { ApiService } from "./api-service";
+import { ApiService } from "./api.service";
 
 @Injectable({
     providedIn: 'root'
@@ -23,9 +23,10 @@ export class AuthService {
 
     authenticate(){
         const token: Observable<RequestToken> = this.apiService.getRequestToken();
-        token.subscribe(response => {
-            window.location.href = `https://www.themoviedb.org/authenticate/${response.token}?redirect_to=http://localhost:4200/approved`;
-        })
+        token.pipe(first()).subscribe(response => {
+            window.location.href = `https://www.themoviedb.org/authenticate/${response.token}?redirect_to=http://localhost:4200`;
+        });
+        
     }
 
     login(token: RequestToken){

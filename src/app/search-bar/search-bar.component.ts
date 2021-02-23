@@ -1,10 +1,11 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Movie } from  '../model/movie';
-import { ApiService } from '../services/api-service';
-import { MovieDataService } from '../services/movie-data-service';
+import { ApiService } from '../services/api.service';
+import { MovieDataService } from '../services/movie-data.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,6 +14,7 @@ import { MovieDataService } from '../services/movie-data-service';
 })
 export class SearchBarComponent implements AfterViewInit {
   movies: Movie[];
+  inputSubscription: Subscription
   searchInput = new FormControl('');
 
   constructor(
@@ -21,7 +23,7 @@ export class SearchBarComponent implements AfterViewInit {
     private movieData: MovieDataService) {}
 
   ngAfterViewInit() {
-    this.searchInput.valueChanges
+    this.inputSubscription = this.searchInput.valueChanges
         .pipe(
           filter(text => text.length > 2),
           debounceTime(400),
@@ -36,6 +38,7 @@ export class SearchBarComponent implements AfterViewInit {
   cleanup() {
     this.movies = [];
     this.searchInput.setValue('');
+    this.inputSubscription.unsubscribe();
   }
 
   showCurrentMovieDetails(id: number) {
