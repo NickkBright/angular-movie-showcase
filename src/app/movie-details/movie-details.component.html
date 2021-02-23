@@ -1,5 +1,5 @@
 
-<div *ngIf="!movieNotFound" class="movie-info-container">
+<div class="movie-info-container">
     <img src="{{movie.poster}}" class="poster"/>
     <div>
         <h1>{{movie.title}}</h1>
@@ -7,8 +7,5 @@
         <p>{{movie.overview}}</p>
         <span>Rating {{movie.vote_average}}</span>
     </div>
-</div>
-<div *ngIf="movieNotFound">
-    <h1>Movie not found</h1>
 </div>
 

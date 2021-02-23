@@ -1,10 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { fromEvent, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, find, map, switchMap, take } from 'rxjs/operators';
-import { Movie } from './model/movie';
-import { ApiService } from './services/api-service';
-import { MovieDataService } from './services/movie-data-service';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from './services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +9,27 @@ import { MovieDataService } from './services/movie-data-service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  movies: Movie[]
-  searchResults$: Observable<Movie[]>
+  userIsLoggedIn: boolean = false;
 
-  @ViewChild('searchInput') searchInput: ElementRef;
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
-  constructor() {}
+  ngOnInit(): void {
+    this.authService.currentSession.subscribe(session => {
+      console.log("SESSION", session);
+      if(session) {
+        this.userIsLoggedIn = true
+      }
+      else {
+        this.userIsLoggedIn = false;
+      }
+    })
+  }
+
+  authenticate() {
+    this.authService.authenticate();
+  }
+  
+  logout() {
+    this.authService.logout();
+  }
 }

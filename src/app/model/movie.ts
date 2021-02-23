@@ -1,5 +1,10 @@
 import { Injectable } from "@angular/core";
 
+export interface MovieResolved {
+    movie?: Movie,
+    error?: any
+}
+
 export class Movie {
     constructor(
         public id: number = null,

@@ -1,17 +1,21 @@
-
 <!-- Toolbar -->
 <header class="toolbar" role="banner">
   <div class="container">
     <a class="logo" routerLink=''>Movie Showcase</a>
-    <app-search-bar class="searchContainer"></app-search-bar>
-    
-  <nav>
-    <ul>
-      <li><a routerLink=''>Home</a></li>
-    </ul>
-  </nav>
+    <app-search-bar class="search-container"></app-search-bar>
+
+    <nav>
+      <ul>
+        <li><a routerLink=''>Home</a></li>
+        <li class="log-in-out"><a *ngIf="userIsLoggedIn; else loginButton" (click)="logout()">Log Out</a></li>
+
+        <ng-template #loginButton>
+          <a (click)="authenticate()">Log In</a>
+        </ng-template>
+      </ul>
+    </nav>
   </div>
-   
+
 </header>
 
 

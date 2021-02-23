@@ -3,7 +3,7 @@ import { Movie, MovieAdapter } from '../model/movie';
 import { HttpClient } from "@angular/common/http";
 import {map} from 'rxjs/operators'
 import { ApiService } from '../services/api-service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MovieDataService } from '../services/movie-data-service';
 
