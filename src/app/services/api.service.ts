@@ -20,7 +20,6 @@ export class ApiService {
     private apiPostCall(url: string, body: any){
         return this.http
             .post(url, body)
-            //catchError(error => throwError(error))
     }
 
     private apiDeleteCall(url: string, options: any) {
@@ -37,6 +36,13 @@ export class ApiService {
         );
     }
 
+    getPopularMovies(page: number): Observable<Movie[]> {
+        const url: string = `${this.apiUrl}movie/popular?api_key=${this.apiKey}&page=${page}`;
+        return this.apiGetCall(url).pipe(
+            map((data: any) => data.results.map(item => this.adapter.adapt(item)))
+        )
+    }
+
     getMovie(id: number): Observable<Movie> {
         const url: string = `${this.apiUrl}movie/${id}?api_key=${this.apiKey}`;
         return this.apiGetCall(url).pipe(
@@ -44,8 +50,8 @@ export class ApiService {
         );;
     }
 
-    searchMovie(query: string) : Observable<Movie[]> {
-        const url: string = `${this.apiUrl}search/movie/?api_key=${this.apiKey}&query=${query}`;
+    searchMovieDB(query: string, type: string) : Observable<Movie[]> {
+        const url: string = `${this.apiUrl}search/${type}/?api_key=${this.apiKey}&query=${query}`;
         return this.apiGetCall(url).pipe(
             map((data: any) => data.results.map(item => this.adapter.adapt(item)))
         );;

@@ -1,5 +1,5 @@
 <div class="searchContainer">
-    <input (blur)="cleanup()" class="searchField" placeholder="search" [formControl]="searchInput"/>
+    <input (onBlur)="typeaheadUnsubscribe()" class="searchField" placeholder="search" [formControl]="searchInput"/>
     <div class="resultsContainer" *ngIf="movies as results">
       <ul class="resultsList">
         <li *ngFor="let movie of results">
