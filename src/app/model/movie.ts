@@ -23,12 +23,12 @@ export class Movie {
 })
 
 export class MovieAdapter {
-    adapt(item: any):Movie {
+    adapt(item: any, type?: string):Movie {
         return new Movie(
             item.id, 
-            item.media_type,
+            item.media_type || type,
             item.title || item.name, 
-            `https://image.tmdb.org/t/p/w500${item.poster_path}`, 
+            item.poster_path? `https://image.tmdb.org/t/p/w500${item.poster_path}` : 'assets/default-avatar.png', 
             item.overview, 
             item.vote_average, 
             item.release_date

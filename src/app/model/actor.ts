@@ -19,7 +19,7 @@ export class ActorAdapter {
             item.id,
             item.name,
             item.character,
-            `https://image.tmdb.org/t/p/w500${item.profile_path}`
+            item.profile_path ? `https://image.tmdb.org/t/p/w500${item.profile_path}` : 'assets/default-avatar.png'
         )
     }
 }

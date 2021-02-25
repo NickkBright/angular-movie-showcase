@@ -6,3 +6,15 @@
 .poster {
     padding-right: 1em;
 }
+
+.actors-container {
+    display: flex;
+    max-width: 40vw;
+    overflow-x: auto;
+}
+
+.actor-picture {
+    height: 40vh;
+    width: 15vw;
+    padding: 1em 1em 0 0;
+}
