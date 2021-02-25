@@ -64,7 +64,7 @@ export class ApiService {
         );
     }
 
-    createSession(token):Observable<Session> {
+    createSession(token: RequestToken):Observable<Session> {
         const url: string = `${this.apiUrl}authentication/session/new?api_key=${this.apiKey}`;
         const body = ({"request_token" : token.token});
         return this.apiPostCall(url, body).pipe(
@@ -72,7 +72,7 @@ export class ApiService {
         );
     }
 
-    deleteSession(sessionId):Observable<Session> {
+    deleteSession(sessionId: string):Observable<Session> {
         const url: string = `${this.apiUrl}authentication/session?api_key=${this.apiKey}`;
         const options = {
             headers: new HttpHeaders({

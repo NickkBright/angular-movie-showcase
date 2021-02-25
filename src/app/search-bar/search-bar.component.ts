@@ -24,6 +24,16 @@ export class SearchBarComponent implements AfterViewInit {
     private movieData: MovieDataService) { }
 
   ngAfterViewInit() {
+    this.searchInit();
+  }
+
+  cleanup(): void {
+    this.movies = [];
+    this.searchInput.setValue('');
+    this.typeaheadUnsubscribe();
+  }
+
+  searchInit() {
     this.inputSubscription = this.searchInput.valueChanges
       .pipe(
         filter(text => text.length > 2),
@@ -40,12 +50,6 @@ export class SearchBarComponent implements AfterViewInit {
           this.movies = data
         }
       )
-  }
-
-  cleanup(): void {
-    this.movies = [];
-    this.searchInput.setValue('');
-    this.typeaheadUnsubscribe();
   }
 
   typeaheadUnsubscribe() {
