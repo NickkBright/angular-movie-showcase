@@ -9,7 +9,7 @@
     <div class="resultsContainer" *ngIf="movies">
       <ul class="resultsList">
         <li *ngFor="let movie of movies">
-          <a (click)="showCurrentMovieDetails(movie.id)">{{movie.title}}</a>
+          <a (click)="showCurrentMovieDetails(movie.id, movie.type)">{{movie.title}}</a>
         </li>
       </ul>
     </div> 

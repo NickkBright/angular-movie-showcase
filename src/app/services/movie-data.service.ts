@@ -1,17 +1,25 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { Movie } from "../model/movie";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Movie } from '../model/movie';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
+/**
+ * Movie data service
+ */
 export class MovieDataService {
-    private movieData = new BehaviorSubject<Movie>(new Movie);
-    currentData = this.movieData.asObservable();
+  private movieData = new BehaviorSubject<Movie>(new Movie());
+  currentData = this.movieData.asObservable();
 
-    constructor() {}
+  constructor() {}
 
-    changeData(data: Movie) {
-        this.movieData.next(data);
-    }
+    /**
+     *  Change movieData subject data
+     * @param { Movie } data New value of movieData subject
+     */
+
+  changeData(data: Movie) {
+    this.movieData.next(data);
+  }
 }

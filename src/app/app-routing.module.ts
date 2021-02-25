@@ -9,33 +9,33 @@ import { AuthGuard } from './util/authGuard';
 
 const routes: Routes = [
   {
-    path:'', 
+    path: '',
     component: HomeComponent,
     resolve: {
-      resolvedSession: AuthResolver
-    }
+      resolvedSession: AuthResolver,
+    },
   },
   {
-    path: 'movie/:id', 
+    path: ':type/:id',
     component: MovieDetailsComponent,
     resolve: {
-      resolvedMovie: MovieResolver
+      resolvedMovie: MovieResolver,
     },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path:'404',
-    component: NotFoundComponent
+    path: '404',
+    component: NotFoundComponent,
   },
   {
-    path:'**', 
-    redirectTo: '', 
-    pathMatch: "full"
-  }
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
