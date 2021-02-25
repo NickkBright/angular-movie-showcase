@@ -6,6 +6,13 @@
         <h2>Release date: {{movie.release_date}}</h2>
         <p>{{movie.overview}}</p>
         <span>Rating {{movie.vote_average}}</span>
+        <div class="actors-container">
+            <div *ngFor="let actor of actors">
+                <img class="actor-picture" src="{{actor.picture}}"/>
+                <h3>{{actor.name}}</h3>
+                <p>{{actor.character}}</p>
+            </div>
+        </div>
     </div>
 </div>
 

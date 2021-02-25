@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Movie, MovieAdapter } from '../model/movie';
 import { RequestToken, Session } from '../model/auth';
+import { Actor, ActorAdapter } from '../model/actor';
+import { movieDBTypes } from '../util/constants';
 
 @Injectable({
     providedIn: 'root'
@@ -27,33 +29,46 @@ export class ApiService {
             .delete(url, options)
     }
 
-    constructor(private http: HttpClient, private adapter: MovieAdapter){}
+    constructor(
+        private http: HttpClient, 
+        private movieAdapter: MovieAdapter,
+        private actorAdapter: ActorAdapter){}
 
     getTrending(): Observable<Movie[]> {
         const url: string = `${this.apiUrl}trending/all/day?api_key=${this.apiKey}`;
         return this.apiGetCall(url).pipe(
-            map((data: any) => data.results.map(item => this.adapter.adapt(item)))
+            map((data: any) => data.results.map((item: any) => this.movieAdapter.adapt(item)))
         );
     }
 
     getPopularMovies(page: number): Observable<Movie[]> {
         const url: string = `${this.apiUrl}movie/popular?api_key=${this.apiKey}&page=${page}`;
         return this.apiGetCall(url).pipe(
-            map((data: any) => data.results.map(item => this.adapter.adapt(item)))
+            map((data: any) => data.results.map((item: any) => this.movieAdapter.adapt(item, movieDBTypes.movie)))
         )
     }
 
     getMovie(id: number): Observable<Movie> {
         const url: string = `${this.apiUrl}movie/${id}?api_key=${this.apiKey}`;
         return this.apiGetCall(url).pipe(
-            map((data: any) => this.adapter.adapt(data))
-        );;
+            map((data: any) => this.movieAdapter.adapt(data, movieDBTypes.movie))
+        );
+    }
+
+    getCast(id: number, type: string): Observable<Actor[]> {
+        const url: string = `${this.apiUrl}${type}/${id}/credits?api_key=${this.apiKey}`;
+        return this.apiGetCall(url).pipe(
+            map((data: any) => data.cast
+                .filter((item: any) => item.known_for_department === "Acting")
+                .map((item: any) =>this.actorAdapter.adapt(item))
+            )
+        )
     }
 
     searchMovieDB(query: string, type: string) : Observable<Movie[]> {
         const url: string = `${this.apiUrl}search/${type}/?api_key=${this.apiKey}&query=${query}`;
         return this.apiGetCall(url).pipe(
-            map((data: any) => data.results.map(item => this.adapter.adapt(item)))
+            map((data: any) => data.results.map((item: any) => this.movieAdapter.adapt(item, type)))
         );;
     }
 

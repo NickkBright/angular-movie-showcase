@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs
 import { Movie } from '../model/movie';
 import { ApiService } from '../services/api.service';
 import { MovieDataService } from '../services/movie-data.service';
-import { searchTypes } from '../util/constants';
+import { movieDBTypes } from '../util/constants';
 
 @Component({
   selector: 'app-search-bar',
@@ -40,8 +40,8 @@ export class SearchBarComponent implements AfterViewInit {
         debounceTime(400),
         distinctUntilChanged(),
         switchMap(search => {
-          const movieSearch = this.apiService.searchMovieDB(search, searchTypes.movie);
-          const tvSearch = this.apiService.searchMovieDB(search, searchTypes.tv);
+          const movieSearch = this.apiService.searchMovieDB(search, movieDBTypes.movie);
+          const tvSearch = this.apiService.searchMovieDB(search, movieDBTypes.tv);
           return merge(movieSearch, tvSearch);
         }),
         map(data => data.slice(0, 7))
