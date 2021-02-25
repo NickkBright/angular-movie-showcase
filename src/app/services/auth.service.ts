@@ -30,6 +30,7 @@ export class AuthService {
     }
 
     login(token: RequestToken){
+        console.log(token);
         return this.apiService.createSession(token).pipe(
             map(session => {
                 localStorage.setItem('currentSession', JSON.stringify(session.id))

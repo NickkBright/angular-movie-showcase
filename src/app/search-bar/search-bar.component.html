@@ -1,8 +1,14 @@
 <div class="searchContainer">
-    <input (onBlur)="typeaheadUnsubscribe()" class="searchField" placeholder="search" [formControl]="searchInput"/>
-    <div class="resultsContainer" *ngIf="movies as results">
+    <input 
+        (blur)="typeaheadUnsubscribe()" 
+        (focus)="searchInit()"
+        class="searchField" 
+        placeholder="search" 
+        [formControl]="searchInput"
+    />
+    <div class="resultsContainer" *ngIf="movies">
       <ul class="resultsList">
-        <li *ngFor="let movie of results">
+        <li *ngFor="let movie of movies">
           <a (click)="showCurrentMovieDetails(movie.id)">{{movie.title}}</a>
         </li>
       </ul>
