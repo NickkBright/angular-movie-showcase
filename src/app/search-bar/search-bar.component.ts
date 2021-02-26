@@ -11,57 +11,63 @@ import { movieDBTypes } from '../util/constants';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss']
+  styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements AfterViewInit {
   movies: Movie[];
-  inputSubscription: Subscription
+  inputSubscription: Subscription;
   searchInput = new FormControl('');
 
-  constructor(
-    private apiService: ApiService,
-    private router: Router,
-    private movieData: MovieDataService) { }
+  constructor(private apiService: ApiService, private router: Router, private movieData: MovieDataService) {}
 
   ngAfterViewInit() {
     this.searchInit();
   }
 
+  /**
+   * Cleanup function. Called after movie/tv click.
+   */
   cleanup(): void {
     this.movies = [];
     this.searchInput.setValue('');
     this.typeaheadUnsubscribe();
   }
 
+  /**
+   * Search function. Called on input value change
+   */
+
   searchInit() {
     this.inputSubscription = this.searchInput.valueChanges
       .pipe(
-        filter(text => text.length > 2),
+        filter((text) => text.length > 2),
         debounceTime(400),
         distinctUntilChanged(),
-        switchMap(search => {
+        switchMap((search) => {
           const movieSearch = this.apiService.searchMovieDB(search, movieDBTypes.movie);
           const tvSearch = this.apiService.searchMovieDB(search, movieDBTypes.tv);
           return merge(movieSearch, tvSearch);
         }),
-        map(data => data.slice(0, 7))
-      ).subscribe(
-        data => {
-          this.movies = data
-        }
+        map((data) => data.slice(0, 7))
       )
+      .subscribe((data) => {
+        this.movies = data;
+      });
   }
 
   typeaheadUnsubscribe() {
     this.inputSubscription.unsubscribe();
-    console.log(this.inputSubscription);
   }
+  /**
+   * Show movie/tv details
+   * @param { number }id Id of movie/tv
+   * @param { string }type Type of item (movie or tv)
+   */
 
-  showCurrentMovieDetails(id: number) {
-    const selectedMovie: Movie = this.movies.find(item => item.id === id);
-    console.log(selectedMovie);
+  showCurrentMovieDetails(id: number, type: string) {
+    const selectedMovie: Movie = this.movies.find((item) => item.id === id);
     this.movieData.changeData(selectedMovie);
-    this.router.navigateByUrl(`movie/${id}`);
+    this.router.navigateByUrl(`${type}/${id}`);
     this.cleanup();
   }
 }

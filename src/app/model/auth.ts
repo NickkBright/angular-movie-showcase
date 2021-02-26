@@ -1,9 +1,9 @@
 export interface RequestToken {
-    success: string,
-    token: string
+  success: string;
+  token: string;
 }
 
 export interface Session {
-    success: boolean
-    id?: string
+  success: boolean;
+  id?: string;
 }
